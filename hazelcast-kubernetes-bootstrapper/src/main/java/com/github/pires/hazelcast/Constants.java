@@ -26,7 +26,7 @@ package com.github.pires.hazelcast;
 
 public final class Constants {
 
-  public static final String hazelcastPodLabelKey = "container";
-  public static final String hazelcastPodLabelValue = "hazelcast-node";
+  public static final String hazelcastPodLabelKey = "component";
+  public static final String hazelcastPodLabelValue = "hazelcast-k8s";
 
 }

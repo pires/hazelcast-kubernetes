@@ -7,7 +7,7 @@
   <artifactId>hazelcast-kubernetes</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
+  
   <name>Hazelcast Kubernetes Bootstrapper</name>
   <url>https://github.com/pires/hazelcast-kubernetes</url>
 
@@ -36,7 +36,7 @@
       </roles>
     </developer>
   </developers>
-
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
@@ -46,8 +46,16 @@
     <!-- dependencies-->
     <fabric8.version>2.0.17</fabric8.version>
     <hazelcast.version>3.3.3</hazelcast.version>
+    <!-- fabric8 plug-in -->
+    <docker.image>pires/hazelcast-kubernetes:0.1</docker.image>
+    <fabric8.kubernetes.name>hazelcast-k8s</fabric8.kubernetes.name>
+    <fabric8.replicas>3</fabric8.replicas>
+    <fabric8.service.name>hazelcast</fabric8.service.name>
+    <fabric8.service.port>5701</fabric8.service.port>
+    <fabric8.service.containerPort>5700</fabric8.service.containerPort>
+    <fabric8.container.name>hazelcast-k8s-container</fabric8.container.name>
   </properties>
-
+  
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -143,26 +151,28 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
+        <groupId>io.fabric8</groupId>
+        <artifactId>fabric8-maven-plugin</artifactId>
+        <version>${fabric8.version}</version>
+        <executions>
+          <execution>
+            <id>json</id>
+            <goals>
+              <goal>json</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>com.github.pires.example.App</mainClass>
-            </manifest>
-          </archive>
+          <mainClass>com.github.pires.hazelcast.Application</mainClass>
         </configuration>
         <executions>
           <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>repackage</goal>
             </goals>
           </execution>
         </executions>
