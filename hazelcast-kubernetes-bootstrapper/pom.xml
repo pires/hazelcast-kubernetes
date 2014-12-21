@@ -47,13 +47,14 @@
     <fabric8.version>2.0.17</fabric8.version>
     <hazelcast.version>3.3.3</hazelcast.version>
     <!-- fabric8 plug-in -->
-    <docker.image>pires/hazelcast-kubernetes:0.1</docker.image>
+    <docker.image>pires/hazelcast-k8s</docker.image>
     <fabric8.kubernetes.name>hazelcast-k8s</fabric8.kubernetes.name>
     <fabric8.replicas>3</fabric8.replicas>
     <fabric8.service.name>hazelcast</fabric8.service.name>
-    <fabric8.service.port>5701</fabric8.service.port>
-    <fabric8.service.containerPort>5700</fabric8.service.containerPort>
+    <fabric8.service.port>5700</fabric8.service.port>
+    <fabric8.service.containerPort>5701</fabric8.service.containerPort>
     <fabric8.container.name>hazelcast-k8s-container</fabric8.container.name>
+    <docker.port.container.hazelcast>5701</docker.port.container.hazelcast>
   </properties>
   
   <parent>
