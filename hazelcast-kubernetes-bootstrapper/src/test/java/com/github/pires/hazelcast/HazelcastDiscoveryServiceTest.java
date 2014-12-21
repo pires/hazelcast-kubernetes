@@ -30,10 +30,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class MainTest {
+public class HazelcastDiscoveryServiceTest {
 
   @Mock
   private Kubernetes kubernetes;
+
+  private final HazelcastDiscoveryService service = new HazelcastDiscoveryService();
 
   @BeforeClass
   public void setup() throws Exception {
@@ -49,7 +51,7 @@ public class MainTest {
   public void test_found_hazelcast_pods() {
     prepare_kubernetes_pod_request();
     replay(kubernetes);
-    assertEquals(2, Main.retrieveHazelcasPods(kubernetes).size());
+    assertEquals(2, service.retrieveHazelcasPods(kubernetes).size());
     verify(kubernetes);
   }
 
