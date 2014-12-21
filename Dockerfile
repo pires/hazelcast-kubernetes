@@ -18,7 +18,7 @@ RUN apt-get install oracle-java8-set-default
 
 # Download hazelcast-kubernetes-bootstrapper & run
 RUN mkdir /opt/hazelcast-k8s
-ADD https://drive.google.com/file/d/0B2hySBwNSLlVcHROa3puSGhTNXM/view?usp=sharing /opt/hazelcast-k8s/bootstrapper.jar
+ADD https://cld.pt/dl/download/ab6b3a5b-101f-436b-9de5-533e62e5dc81/hazelcast-kubernetes-0.1-SNAPSHOT.jar?download=true /opt/hazelcast-k8s/bootstrapper.jar
 CMD java -jar /opt/hazelcast-k8s/bootstrapper.jar
 
 EXPOSE 5701
