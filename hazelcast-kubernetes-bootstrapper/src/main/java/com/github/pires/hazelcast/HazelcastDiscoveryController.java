@@ -38,23 +38,30 @@ import org.springframework.stereotype.Controller;
  * Read from Kubernetes API all labeled Hazelcast pods, get their IP and connect to them.
  */
 @Controller
-public class HazelcastDiscoveryService implements CommandLineRunner {
-
+public class HazelcastDiscoveryController implements CommandLineRunner {
+  
   private static final Logger log = LoggerFactory.getLogger(
-      HazelcastDiscoveryService.class);
+      HazelcastDiscoveryController.class);
 
   // TODO load this from env vars
   private static final String HC_GROUP_NAME = "someGroup";
   private static final String HC_GROUP_PASSWORD = "someSecret";
   private static final int HC_PORT = 5701;
-
-  @Value("#{systemEnvironment.KUBERNETES_MASTER}")
-  private String kubeMaster;
-
+  
+  @Value("#{systemEnvironment.KUBERNETES_RO_SERVICE_HOST}")
+  private String kubeMasterHost;
+  
+  @Value("#{systemEnvironment.KUBERNETES_RO_SERVICE_PORT}")
+  private String kubeMasterPort;
+  
+  private String getKubeApi() {
+    return "http://" + kubeMasterHost + ":" + kubeMasterPort;
+  }
+  
   @Override
   public void run(String... args) {
-    log.info("Asking k8s registry at {}..", kubeMaster);
-    KubernetesFactory kubernetesFactory = new KubernetesFactory(kubeMaster);
+    log.info("Asking k8s registry at {}..", getKubeApi());
+    KubernetesFactory kubernetesFactory = new KubernetesFactory(getKubeApi());
     final List<PodSchema> hazelcastPods = retrieveHazelcasPods(
         kubernetesFactory.createKubernetes());
     log.info("Found {} pods running Hazelcast.", hazelcastPods.size());
@@ -62,7 +69,7 @@ public class HazelcastDiscoveryService implements CommandLineRunner {
       runHazelcast(hazelcastPods);
     }
   }
-
+  
   public List<PodSchema> retrieveHazelcasPods(final Kubernetes kubernetes) {
     final List<PodSchema> hazelcastPods = new CopyOnWriteArrayList<>();
     kubernetes.getPods().getItems().parallelStream().filter(pod -> pod.
@@ -70,7 +77,7 @@ public class HazelcastDiscoveryService implements CommandLineRunner {
         forEach(hazelcastPods::add);
     return hazelcastPods;
   }
-
+  
   private void runHazelcast(final List<PodSchema> hazelcastPods) {
     // configure Hazelcast instance
     final Config cfg = new Config();
@@ -89,6 +96,7 @@ public class HazelcastDiscoveryService implements CommandLineRunner {
     hazelcastPods.stream().filter(pod -> pod.getCurrentState().getStatus().
         equals("RUNNING")).forEach(pod -> tcpCfg.addMember(
                 pod.getCurrentState().getPodIP()));
+    tcpCfg.getMembers().forEach(member -> log.info("Added member {}", member));
     tcpCfg.setEnabled(true);
     // network join configuration
     final JoinConfig joinCfg = new JoinConfig();
@@ -101,5 +109,5 @@ public class HazelcastDiscoveryService implements CommandLineRunner {
     // run
     Hazelcast.newHazelcastInstance(cfg);
   }
-
+  
 }
