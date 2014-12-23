@@ -1,0 +1,24 @@
+{
+  "id": "hazelcast-k8s-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 1,
+    "replicaSelector": {"component": "hazelcast-k8s"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "hazelcast-k8sPod",
+          "containers": [{
+              "name": "hazelcast-k8s-node",
+              "image": "pires/hazelcast-k8s",
+              "ports": [{"name": "hazelcast", "containerPort": 5701}]
+          }]
+        }
+      },
+      "labels": {"component": "hazelcast-k8s"}
+    }
+  },
+  "labels": {"component": "hazelcast-k8s"}
+}
