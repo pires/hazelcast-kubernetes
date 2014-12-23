@@ -93,10 +93,11 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
     mcCfg.setEnabled(false);
     // tcp
     final TcpIpConfig tcpCfg = new TcpIpConfig();
-    hazelcastPods.stream().filter(pod -> pod.getCurrentState().getStatus().
-        equals("RUNNING")).forEach(pod -> tcpCfg.addMember(
-                pod.getCurrentState().getPodIP()));
-    tcpCfg.getMembers().forEach(member -> log.info("Added member {}", member));
+    hazelcastPods.stream().forEach(pod -> {
+      final String podIp = pod.getCurrentState().getPodIP();
+      tcpCfg.addMember(podIp);
+      log.info("Added member {}", podIp);
+    });
     tcpCfg.setEnabled(true);
     // network join configuration
     final JoinConfig joinCfg = new JoinConfig();
