@@ -27,9 +27,9 @@ WORKDIR /opt/hazelcast-k8s
 
 # clean-up
 RUN rm -rf hazelcast-kubernetes
-RUN apt-get remove --purge maven git
-RUN apt-get autoremove
-RUN apt-get autoclean
+RUN apt-get -y remove --purge maven git
+RUN apt-get -y autoremove
+RUN apt-get -y autoclean
 
 # run
 CMD java -jar bootstrapper.jar
