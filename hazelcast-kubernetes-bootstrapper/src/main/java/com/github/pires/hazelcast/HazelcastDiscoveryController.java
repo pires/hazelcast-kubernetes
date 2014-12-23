@@ -39,7 +39,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class HazelcastDiscoveryController implements CommandLineRunner {
-
+  
   private static final Logger log = LoggerFactory.getLogger(
       HazelcastDiscoveryController.class);
 
@@ -47,17 +47,17 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
   private static final String HC_GROUP_NAME = "someGroup";
   private static final String HC_GROUP_PASSWORD = "someSecret";
   private static final int HC_PORT = 5701;
-
+  
   @Value("#{systemEnvironment.KUBERNETES_RO_SERVICE_HOST}")
   private String kubeMasterHost;
-
+  
   @Value("#{systemEnvironment.KUBERNETES_RO_SERVICE_PORT}")
   private String kubeMasterPort;
-
+  
   private String getKubeApi() {
     return "http://" + kubeMasterHost + ":" + kubeMasterPort;
   }
-
+  
   @Override
   public void run(String... args) {
     log.info("Asking k8s registry at {}..", getKubeApi());
@@ -69,7 +69,7 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
       runHazelcast(hazelcastPods);
     }
   }
-
+  
   public List<PodSchema> retrieveHazelcasPods(final Kubernetes kubernetes) {
     final List<PodSchema> hazelcastPods = new CopyOnWriteArrayList<>();
     kubernetes.getPods().getItems().parallelStream().filter(pod -> pod.
@@ -77,7 +77,7 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
         forEach(hazelcastPods::add);
     return hazelcastPods;
   }
-
+  
   private void runHazelcast(final List<PodSchema> hazelcastPods) {
     // configure Hazelcast instance
     final Config cfg = new Config();
@@ -93,11 +93,12 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
     mcCfg.setEnabled(false);
     // tcp
     final TcpIpConfig tcpCfg = new TcpIpConfig();
-    hazelcastPods.stream().forEach(pod -> {
-      final String podIp = pod.getCurrentState().getPodIP();
-      tcpCfg.addMember(podIp);
-      log.info("Added member {}", podIp);
-    });
+    hazelcastPods.stream().filter(
+        pod -> pod.getCurrentState().getPodIP() != null).forEach(pod -> {
+          final String podIp = pod.getCurrentState().getPodIP();
+          tcpCfg.addMember(podIp);
+          log.info("Added member {}", podIp);
+        });
     tcpCfg.setEnabled(true);
     // network join configuration
     final JoinConfig joinCfg = new JoinConfig();
@@ -112,5 +113,5 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
     // run
     Hazelcast.newHazelcastInstance(cfg);
   }
-
+  
 }
