@@ -19,8 +19,8 @@ RUN apt-get install oracle-java8-set-default
 # Build hazelcast-kubernetes-bootstrapper
 RUN mkdir /opt/hazelcast-k8s
 WORKDIR /opt/hazelcast-k8s
-RUN git clone https://github.com/pires/hazelcast-kubernetes.git
-WORKDIR /opt/hazelcast-k8s/hazelcast-kubernetes/hazelcast-kubernetes-bootstrapper
+RUN git clone https://github.com/pires/hazelcast-kubernetes-bootstrapper.git
+WORKDIR /opt/hazelcast-k8s/hazelcast-kubernetes-bootstrapper
 RUN mvn clean package
 RUN mv target/hazelcast-kubernetes-0.1-SNAPSHOT.jar /opt/hazelcast-k8s/bootstrapper.jar
 WORKDIR /opt/hazelcast-k8s
