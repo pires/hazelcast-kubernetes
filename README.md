@@ -10,7 +10,12 @@ Hazelcast clustering for Kubernetes made easy.
 
 ## Build
 
-The image is already available at [Docker Hub](https://registry.hub.docker.com/u/pires/hazelcast-k8s/). You can also ```docker pull pires/hazelcast-k8s```.
+The image is already available at [Docker Hub](https://registry.hub.docker.com/u/pires/hazelcast-k8s/). You can:
+
+```
+docker pull pires/hazelcast-k8s
+```
+
 But if you feel like building it yourself:
 
 ```
@@ -30,7 +35,7 @@ gcloud preview container replicationcontrollers create --config-file=hazelcast-k
 Check the ```pods``` list:
 
 ```
-cloud preview container pods list
+gcloud preview container pods list
 ```
 
 You should see one replica of an Hazelcast node.
