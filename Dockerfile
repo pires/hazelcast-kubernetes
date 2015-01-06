@@ -23,6 +23,7 @@ RUN mkdir /opt/hazelcast-k8s
 WORKDIR /opt/hazelcast-k8s
 RUN git clone https://github.com/pires/hazelcast-kubernetes-bootstrapper.git
 WORKDIR /opt/hazelcast-k8s/hazelcast-kubernetes-bootstrapper
+ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 RUN mvn clean package && \
     mv target/hazelcast-kubernetes-0.1-SNAPSHOT.jar /opt/hazelcast-k8s/bootstrapper.jar && \
     cd .. && \
