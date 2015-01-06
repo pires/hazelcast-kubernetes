@@ -4,10 +4,7 @@
   "apiVersion": "v1beta1",
   "port": 5701,
   "containerPort": 5701,
-  "labels": {
-    "component": "hazelcast-k8s"
-  },
   "selector": {
-    "component": "hazelcast-k8s"
+    "name": "hazelcast"
   }
 }

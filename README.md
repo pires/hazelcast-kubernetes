@@ -43,7 +43,7 @@ You should see one replica of an Hazelcast node.
 Let's now scale it up:
 
 ```
-gcloud preview container replicationcontrollers resize hazelcast-k8s-controller --num-replicas=3
+gcloud preview container replicationcontrollers resize hazelcast --num-replicas=3
 ```
 
 Check the ```pods``` list once more.
@@ -51,7 +51,7 @@ Check the ```pods``` list once more.
 After all pods are running, and by inspecting their logs, you should confirm that Hazelcast nodes are connected to each other.
 
 ```
-gcloud preview container kubectl log f7c7437b-8b09-11e4-8e80-42010af0637f hazelcast-k8s-node
+gcloud preview container kubectl log <pod identifier> hazelcast
 ```
 
 You should see something like:
