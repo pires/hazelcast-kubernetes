@@ -6,9 +6,13 @@ Hazelcast clustering for Kubernetes made easy.
 ## Pre-requisites
 
 * Docker 1.3+
-* Kubernetes binaries or ```gcloud``` (GCE)
+* Kubernetes cluster
 
-## Build
+## Kubernetes cluster
+
+You can use GCE or a local cluster. For a local cluster on MacOS X or Linux, just hit [this other repository from yours truly](https://github.com/pires/kubernetes-vagrant-coreos-cluster).
+
+## Build Docker image
 
 The image is already available at [Docker Hub](https://registry.hub.docker.com/u/pires/hazelcast-k8s/). You can:
 
@@ -24,34 +28,86 @@ docker build -t hazelcast-k8s:0.1 .
 
 ## Deploy
 
+### Service 
+
+So that you can access the cluster, you need to deploy a ```service```.
+
+**GCE**
+```
+gcloud preview container services create --config-file=hazelcast-k8s-service.json
+```
+
+**Local cluster**
+```
+kubectl create -f hazelcast-k8s-service.json
+```
+
+Confirm service has been created:
+
+**GCE**
+```
+gcloud preview container services list
+```
+
+**Local cluster**
+```
+kubecfg list services
+```
+
+
 ### Replication Controller
 
 Let's start with a 1-replica controller:
+
+**GCE**
 
 ```
 gcloud preview container replicationcontrollers create --config-file=hazelcast-k8s-controller.json
 ```
 
+**Local cluster**
+```
+kubectl create -f hazelcast-k8s-controller.json
+```
+
 Check the ```pods``` list:
 
+**GCE**
 ```
 gcloud preview container pods list
+```
+
+**Local cluster**
+```
+kubecfg list pods
 ```
 
 You should see one replica of an Hazelcast node.
 
 Let's now scale it up:
 
+**GCE**
 ```
 gcloud preview container replicationcontrollers resize hazelcast --num-replicas=3
+```
+
+**Local cluster**
+```
+kubecfg resize hazelcast 3
 ```
 
 Check the ```pods``` list once more.
 
 After all pods are running, and by inspecting their logs, you should confirm that Hazelcast nodes are connected to each other.
 
+**GCE**
 ```
 gcloud preview container kubectl log <pod identifier> hazelcast
+```
+
+**Local cluster**
+```
+kubectl log <pod identifier> hazelcast
 ```
 
 You should see something like:
@@ -76,20 +132,6 @@ You should see something like:
 2014-12-24T01:21:23.036227250Z 	Member [10.160.2.4]:5701 this
 2014-12-24T01:21:23.036227250Z 	Member [10.160.2.3]:5701
 2014-12-24T01:21:23.036227250Z }
-```
-
-### Service 
-
-So that you can access the cluster, you need to deploy a ```service```.
-
-```
-gcloud preview container services create --config-file=hazelcast-k8s-service.json
-```
-
-Confirm service has been create:
-
-```
-gcloud preview container services list
 ```
 
 ## Accessing cluster
