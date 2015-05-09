@@ -3,109 +3,63 @@ hazelcast-kubernetes
 
 Hazelcast clustering for Kubernetes made easy.
 
+Lean (186MB) JRE 8 + Hazelcast 3.4.2 + Kubernetes Hazelcast discovery Docker image, based on progrium/busybox.
+
 ## Pre-requisites
 
-* Docker 1.3+
-* Kubernetes cluster
+* Docker 1.5+
+* Kubernetes 0.16.2+ cluster
 
 ## Kubernetes cluster
 
-You can use GCE or a local cluster. For a local cluster on MacOS X or Linux, just hit [this other repository from yours truly](https://github.com/pires/kubernetes-vagrant-coreos-cluster).
+You can test with a local cluster. Check [this other repository from yours truly](https://github.com/pires/kubernetes-vagrant-coreos-cluster).
 
-## Build Docker image
+## Docker image
 
-The image is already available at [Docker Hub](https://registry.hub.docker.com/u/pires/hazelcast-k8s/). You can:
-
-```
-docker pull pires/hazelcast-k8s
-```
-
-But if you feel like building it yourself:
-
-```
-docker build -t hazelcast-k8s:0.1 .
-```
+The image is already available at [Docker Hub](https://registry.hub.docker.com/u/pires/hazelcast-k8s/)
 
 ## Deploy
 
-### Service 
+### Service
 
 So that you can access the cluster, you need to deploy a ```service```.
 
-**GCE**
 ```
-gcloud preview container services create --config-file=hazelcast-k8s-service.json
-```
-
-**Local cluster**
-```
-kubectl create -f hazelcast-k8s-service.json
+kubectl create -f hazelcast-service.yaml
 ```
 
 Confirm service has been created:
 
-**GCE**
-```
-gcloud preview container services list
-```
-
-**Local cluster**
 ```
 kubecfg list services
 ```
-
 
 ### Replication Controller
 
 Let's start with a 1-replica controller:
 
-**GCE**
-
 ```
-gcloud preview container replicationcontrollers create --config-file=hazelcast-k8s-controller.json
-```
-
-**Local cluster**
-```
-kubectl create -f hazelcast-k8s-controller.json
+kubectl create -f hazelcast-controller.yaml
 ```
 
 Check the ```pods``` list:
 
-**GCE**
 ```
-gcloud preview container pods list
-```
-
-**Local cluster**
-```
-kubecfg list pods
+kubectl list pods
 ```
 
-You should see one replica of an Hazelcast node.
+You should see **one** Hazelcast pod.
 
-Let's now scale it up:
+Let's scale it up:
 
-**GCE**
 ```
-gcloud preview container replicationcontrollers resize hazelcast --num-replicas=3
-```
-
-**Local cluster**
-```
-kubecfg resize hazelcast 3
+kubectl resize --replicas=3 replicationcontroller hazelcast
 ```
 
 Check the ```pods``` list once more.
 
 After all pods are running, and by inspecting their logs, you should confirm that Hazelcast nodes are connected to each other.
 
-**GCE**
-```
-gcloud preview container kubectl log <pod identifier> hazelcast
-```
-
-**Local cluster**
 ```
 kubectl log <pod identifier> hazelcast
 ```
