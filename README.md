@@ -8,7 +8,7 @@ Lean (186MB) JRE 8u45 + Hazelcast 3.4.2 + Kubernetes discovery Docker image, bas
 ## Pre-requisites
 
 * Docker 1.5+
-* Kubernetes 0.16.2+ cluster
+* Kubernetes 0.18.0 or newer cluster
 
 ## Kubernetes cluster
 
@@ -177,7 +177,7 @@ $ kubectl log hazelcast-ulkws hazelcast
 2015-05-09 22:06:20.016  INFO 5 --- [           main] com.github.pires.hazelcast.Application   : Starting Application v0.2-SNAPSHOT on hazelcast-enyli with PID 5 (/bootstrapper.jar started by root in /)
 2015-05-09 22:06:20.071  INFO 5 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5424f110: startup date [Sat May 09 22:06:20 GMT 2015]; root of context hierarchy
 2015-05-09 22:06:21.511  INFO 5 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
-2015-05-09 22:06:21.549  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Asking k8s registry at http://kubernetes.default.cluster.local..
+2015-05-09 22:06:21.549  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Asking k8s registry at https://kubernetes.default.cluster.local..
 2015-05-09 22:06:22.031  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Found 2 pods running Hazelcast.
 2015-05-09 22:06:22.176  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.4.2] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [10.244.90.3, 10.244.66.2]
 2015-05-09 22:06:22.177  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.4.2] Prefer IPv4 stack is true.
