@@ -1,4 +1,4 @@
-apiVersion: v1beta3
+apiVersion: v1
 kind: ReplicationController
 metadata: 
   labels: 
@@ -13,11 +13,11 @@ spec:
       labels: 
         name: hazelcast
     spec: 
-      containers: 
+      containers:
         - resources:
             limits:
               cpu: 1
-          image: quay.io/pires/hazelcast-kubernetes:0.3.1
+          image: quay.io/pires/hazelcast-kubernetes:0.4.1
           name: hazelcast
           env:
           - name: "DNS_DOMAIN"
