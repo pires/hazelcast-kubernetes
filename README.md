@@ -94,7 +94,7 @@ spec:
         name: hazelcast
     spec: 
       containers: 
-          image: quay.io/pires/hazelcast-kubernetess:0.4.1
+          image: quay.io/pires/hazelcast-kubernetess:0.5
           name: hazelcast
           env:
           - name: "DNS_DOMAIN"
