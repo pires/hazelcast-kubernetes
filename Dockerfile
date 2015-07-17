@@ -1,4 +1,4 @@
-FROM quay.io/pires/docker-jre:8u45-3
+FROM quay.io/pires/docker-jre:8u51
 
 MAINTAINER Paulo Pires <pjpires@gmail.com>
 
