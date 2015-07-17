@@ -3,7 +3,7 @@ hazelcast-kubernetes
 
 Hazelcast clustering for Kubernetes made easy.
 
-Lean (186MB) JRE 8u45 + Hazelcast 3.5 + Kubernetes discovery Docker image, based on `progrium/busybox`.
+Lean (185MB) JRE 8u51 + Hazelcast 3.5 + Kubernetes discovery Docker image, based on `gliderlabs/alpine`.
 
 ## Pre-requisites
 
@@ -94,7 +94,7 @@ spec:
         name: hazelcast
     spec: 
       containers: 
-          image: quay.io/pires/hazelcast-kubernetess:0.5
+          image: quay.io/pires/hazelcast-kubernetess:0.5.1
           name: hazelcast
           env:
           - name: "DNS_DOMAIN"
