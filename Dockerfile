@@ -5,7 +5,7 @@ MAINTAINER Paulo Pires <pjpires@gmail.com>
 EXPOSE 5701
 
 RUN \
-  apk --update curl ca-certificates; apk upgrade; \
+  apk add --update curl ca-certificates; apk upgrade; \
   curl -Lskj https://github.com/pires/hazelcast-kubernetes-bootstrapper/releases/download/0.5.1/hazelcast-kubernetes-bootstrapper-0.5.1.jar \
   -o /bootstrapper.jar;\
   apk del curl wget; \

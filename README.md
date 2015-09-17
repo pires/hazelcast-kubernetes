@@ -3,7 +3,7 @@ hazelcast-kubernetes
 
 Hazelcast clustering for Kubernetes made easy.
 
-Lean (185MB) Hazelcast with  Kubernetes discovery support container image, based on `alpine`.
+Lean (188MB) Hazelcast with  Kubernetes discovery support container image, based on `alpine`.
 
 ## Software
 
