@@ -3,12 +3,17 @@ hazelcast-kubernetes
 
 Hazelcast clustering for Kubernetes made easy.
 
-Lean (185MB) JRE 8u51 + Hazelcast 3.5 + Kubernetes discovery Docker image, based on `gliderlabs/alpine`.
+Lean (185MB) Hazelcast with  Kubernetes discovery support container image, based on `alpine`.
+
+## Software
+
+* JRE 8u60
+* Hazelcast 3.5.2
 
 ## Pre-requisites
 
-* Docker 1.5+
-* Kubernetes 0.21.0 or newer cluster
+* Docker 1.7.1+
+* Kubernetes 1.0 or newer cluster
 
 ## Kubernetes cluster
 
@@ -94,7 +99,7 @@ spec:
         name: hazelcast
     spec: 
       containers: 
-          image: quay.io/pires/hazelcast-kubernetess:0.5.1
+          image: quay.io/pires/hazelcast-kubernetes:0.5.1
           name: hazelcast
           env:
           - name: "DNS_DOMAIN"
@@ -104,9 +109,7 @@ spec:
               name: hazelcast
 ```
 
-There are a few things to note in this description.  First is that we are running the `quay.io/pires/hazelcast-kubernetes` image, tag `0.3.1`.  This is a `busybox` installation with JRE 8.  However it also adds a custom [`application`](https://github.com/pires/hazelcast-kubernetes-bootstrapper) that finds any Hazelcast nodes in the cluster and bootstraps an Hazelcast instance accordingle.  The `HazelcastDiscoveryController` discovers the Kubernetes API Server using the built in Kubernetes discovery service, and then uses the Kubernetes API to find new nodes (more on this later).
-
-You may also note that we tell Kubernetes that the container exposes the `hazelcast` port.  Finally, we tell the cluster manager that we need 1 cpu core.
+You may note that we tell Kubernetes that the container exposes the `hazelcast` port.  Finally, we tell the cluster manager that we need 1 cpu core.
 
 The bulk of the replication controller config is actually identical to the Hazelcast pod declaration above, it simply gives the controller a recipe to use when creating new pods.  The other parts are the `selector` which contains the controller's selector query, and the `replicas` parameter which specifies the desired number of replicas, in this case 1.
 
@@ -188,25 +191,25 @@ $ kubectl log hazelcast-nanfb hazelcast
 2015-07-10 13:26:35.888  INFO 5 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2015-07-10 13:26:35.924  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Asking k8s registry at https://kubernetes.default.svc.cluster.local..
 2015-07-10 13:26:37.259  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Found 2 pods running Hazelcast.
-2015-07-10 13:26:37.404  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [10.244.77.3, 10.244.37.3]
-2015-07-10 13:26:37.405  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5] Prefer IPv4 stack is true.
-2015-07-10 13:26:37.415  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5] Picked Address[10.244.77.3]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
-2015-07-10 13:26:37.852  INFO 5 --- [           main] com.hazelcast.spi.OperationService       : [10.244.77.3]:5701 [someGroup] [3.5] Backpressure is disabled
-2015-07-10 13:26:37.879  INFO 5 --- [           main] c.h.s.i.o.c.ClassicOperationExecutor     : [10.244.77.3]:5701 [someGroup] [3.5] Starting with 2 generic operation threads and 2 partition operation threads.
-2015-07-10 13:26:38.531  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.77.3]:5701 [someGroup] [3.5] Hazelcast 3.5 (20150617 - 4270dc6) starting at Address[10.244.77.3]:5701
-2015-07-10 13:26:38.532  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.77.3]:5701 [someGroup] [3.5] Copyright (c) 2008-2015, Hazelcast, Inc. All Rights Reserved.
-2015-07-10 13:26:38.533  INFO 5 --- [           main] com.hazelcast.instance.Node              : [10.244.77.3]:5701 [someGroup] [3.5] Creating TcpIpJoiner
-2015-07-10 13:26:38.534  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.77.3]:5701 [someGroup] [3.5] Address[10.244.77.3]:5701 is STARTING
-2015-07-10 13:26:38.672  INFO 5 --- [        cached1] com.hazelcast.nio.tcp.SocketConnector    : [10.244.77.3]:5701 [someGroup] [3.5] Connecting to /10.244.37.3:5701, timeout: 0, bind-any: true
-2015-07-10 13:26:38.683  INFO 5 --- [        cached1] c.h.nio.tcp.TcpIpConnectionManager       : [10.244.77.3]:5701 [someGroup] [3.5] Established socket connection between /10.244.77.3:59951
-2015-07-10 13:26:45.699  INFO 5 --- [ration.thread-1] com.hazelcast.cluster.ClusterService     : [10.244.77.3]:5701 [someGroup] [3.5]
+2015-07-10 13:26:37.404  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5.2] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [10.244.77.3, 10.244.37.3]
+2015-07-10 13:26:37.405  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5.2] Prefer IPv4 stack is true.
+2015-07-10 13:26:37.415  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.5.2] Picked Address[10.244.77.3]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+2015-07-10 13:26:37.852  INFO 5 --- [           main] com.hazelcast.spi.OperationService       : [10.244.77.3]:5701 [someGroup] [3.5.2] Backpressure is disabled
+2015-07-10 13:26:37.879  INFO 5 --- [           main] c.h.s.i.o.c.ClassicOperationExecutor     : [10.244.77.3]:5701 [someGroup] [3.5.2] Starting with 2 generic operation threads and 2 partition operation threads.
+2015-07-10 13:26:38.531  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.77.3]:5701 [someGroup] [3.5.2] Hazelcast 3.5 (20150617 - 4270dc6) starting at Address[10.244.77.3]:5701
+2015-07-10 13:26:38.532  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.77.3]:5701 [someGroup] [3.5.2] Copyright (c) 2008-2015, Hazelcast, Inc. All Rights Reserved.
+2015-07-10 13:26:38.533  INFO 5 --- [           main] com.hazelcast.instance.Node              : [10.244.77.3]:5701 [someGroup] [3.5.2] Creating TcpIpJoiner
+2015-07-10 13:26:38.534  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.77.3]:5701 [someGroup] [3.5.2] Address[10.244.77.3]:5701 is STARTING
+2015-07-10 13:26:38.672  INFO 5 --- [        cached1] com.hazelcast.nio.tcp.SocketConnector    : [10.244.77.3]:5701 [someGroup] [3.5.2] Connecting to /10.244.37.3:5701, timeout: 0, bind-any: true
+2015-07-10 13:26:38.683  INFO 5 --- [        cached1] c.h.nio.tcp.TcpIpConnectionManager       : [10.244.77.3]:5701 [someGroup] [3.5.2] Established socket connection between /10.244.77.3:59951
+2015-07-10 13:26:45.699  INFO 5 --- [ration.thread-1] com.hazelcast.cluster.ClusterService     : [10.244.77.3]:5701 [someGroup] [3.5.2]
 
 Members [2] {
 	Member [10.244.37.3]:5701
 	Member [10.244.77.3]:5701 this
 }
 
-2015-07-10 13:26:47.722  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.77.3]:5701 [someGroup] [3.5] Address[10.244.77.3]:5701 is STARTED
+2015-07-10 13:26:47.722  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.77.3]:5701 [someGroup] [3.5.2] Address[10.244.77.3]:5701 is STARTED
 2015-07-10 13:26:47.723  INFO 5 --- [           main] com.github.pires.hazelcast.Application   : Started Application in 13.792 seconds (JVM running for 14.542)
 ```
 
