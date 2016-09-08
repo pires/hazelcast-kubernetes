@@ -97,7 +97,7 @@ spec:
     spec: 
       containers: 
       - name: hazelcast
-        image: quay.io/pires/hazelcast-kubernetes:0.6
+        image: quay.io/pires/hazelcast-kubernetes:0.6.1
         imagePullPolicy: Always
         env:
         - name: "DNS_DOMAIN"
@@ -378,7 +378,7 @@ public class HazelcastDiscoveryController implements CommandLineRunner {
         mcCfg.setEnabled(false);
         // tcp
         final TcpIpConfig tcpCfg = new TcpIpConfig();
-        nodes.parallelStream().forEach(tcpCfg::addMember);
+        nodes.forEach(tcpCfg::addMember);
         tcpCfg.setEnabled(true);
         // network join configuration
         final JoinConfig joinCfg = new JoinConfig();
