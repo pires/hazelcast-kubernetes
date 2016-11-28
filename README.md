@@ -8,7 +8,7 @@ Lean (124MB) Hazelcast with  Kubernetes discovery support container image, based
 ## Software
 
 * JRE 8u112
-* Hazelcast 3.7
+* Hazelcast 3.7.3
 
 ## Pre-requisites
 
@@ -97,7 +97,7 @@ spec:
     spec: 
       containers: 
       - name: hazelcast
-        image: quay.io/pires/hazelcast-kubernetes:0.6.1
+        image: quay.io/pires/hazelcast-kubernetes:0.6.2
         imagePullPolicy: Always
         env:
         - name: "DNS_DOMAIN"
@@ -125,7 +125,7 @@ $ kubectl get endpoints hazelcast -o yaml
 apiVersion: v1
 kind: Endpoints
 metadata:
-  creationTimestamp: 2016-09-02T08:57:27Z
+  creationTimestamp: 2016-11-28T08:57:27Z
   labels:
     name: hazelcast
   name: hazelcast
@@ -211,7 +211,7 @@ Now let's scale our cluster to 4 nodes:
 $ kubectl scale deployment hazelcast --replicas 4
 ```
 
-Examine the status again by checking a node’s log and you should see the 4 members connected. Something like:
+Examine the status again by checking a node's logs and you should see the 4 members connected. Something like:
 ```
 (...)
 
