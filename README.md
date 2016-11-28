@@ -7,7 +7,7 @@ Lean (124MB) Hazelcast with  Kubernetes discovery support container image, based
 
 ## Software
 
-* JRE 8u92
+* JRE 8u112
 * Hazelcast 3.7
 
 ## Pre-requisites
