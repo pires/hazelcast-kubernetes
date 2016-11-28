@@ -175,30 +175,30 @@ $ kubectl logs hazelcast-1790698550-3heau
 2016-09-02 09:01:49.577  INFO 5 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2016-09-02 09:01:49.596  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Asking k8s registry at https://kubernetes.default.svc.cluster.local..
 2016-09-02 09:01:50.459  INFO 5 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Found 1 pods running Hazelcast.
-2016-09-02 09:01:50.704  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [10.244.37.2]
-2016-09-02 09:01:50.704  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7] Prefer IPv4 stack is true.
-2016-09-02 09:01:50.720  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7] Picked [10.244.37.2]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
-2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7] Hazelcast 3.7 (20160817 - 1302600) starting at [10.244.37.2]:5701
-2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
-2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7] Configured Hazelcast Serialization version : 1
-2016-09-02 09:01:51.280  INFO 5 --- [           main] c.h.s.i.o.impl.BackpressureRegulator     : [10.244.37.2]:5701 [someGroup] [3.7] Backpressure is disabled
-2016-09-02 09:01:52.508  INFO 5 --- [           main] com.hazelcast.instance.Node              : [10.244.37.2]:5701 [someGroup] [3.7] Creating TcpIpJoiner
-2016-09-02 09:01:52.510  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.37.2]:5701 [someGroup] [3.7] [10.244.37.2]:5701 is STARTING
-2016-09-02 09:01:52.869  INFO 5 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [10.244.37.2]:5701 [someGroup] [3.7] Starting 2 partition threads
-2016-09-02 09:01:52.874  INFO 5 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [10.244.37.2]:5701 [someGroup] [3.7] Starting 3 generic threads (1 dedicated for priority tasks)
-2016-09-02 09:01:52.893  INFO 5 --- [           main] c.h.n.t.n.NonBlockingIOThreadingModel    : [10.244.37.2]:5701 [someGroup] [3.7] TcpIpConnectionManager configured with Non Blocking IO-threading model: 3 input threads and 3 output threads
-2016-09-02 09:01:52.945  INFO 5 --- [           main] com.hazelcast.cluster.impl.TcpIpJoiner   : [10.244.37.2]:5701 [someGroup] [3.7]
+2016-09-02 09:01:50.704  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7.3] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [10.244.37.2]
+2016-09-02 09:01:50.704  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7.3] Prefer IPv4 stack is true.
+2016-09-02 09:01:50.720  INFO 5 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.7.3] Picked [10.244.37.2]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7.3] Hazelcast 3.7 (20160817 - 1302600) starting at [10.244.37.2]:5701
+2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7.3] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+2016-09-02 09:01:50.772  INFO 5 --- [           main] com.hazelcast.system                     : [10.244.37.2]:5701 [someGroup] [3.7.3] Configured Hazelcast Serialization version : 1
+2016-09-02 09:01:51.280  INFO 5 --- [           main] c.h.s.i.o.impl.BackpressureRegulator     : [10.244.37.2]:5701 [someGroup] [3.7.3] Backpressure is disabled
+2016-09-02 09:01:52.508  INFO 5 --- [           main] com.hazelcast.instance.Node              : [10.244.37.2]:5701 [someGroup] [3.7.3] Creating TcpIpJoiner
+2016-09-02 09:01:52.510  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.37.2]:5701 [someGroup] [3.7.3] [10.244.37.2]:5701 is STARTING
+2016-09-02 09:01:52.869  INFO 5 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [10.244.37.2]:5701 [someGroup] [3.7.3] Starting 2 partition threads
+2016-09-02 09:01:52.874  INFO 5 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [10.244.37.2]:5701 [someGroup] [3.7.3] Starting 3 generic threads (1 dedicated for priority tasks)
+2016-09-02 09:01:52.893  INFO 5 --- [           main] c.h.n.t.n.NonBlockingIOThreadingModel    : [10.244.37.2]:5701 [someGroup] [3.7.3] TcpIpConnectionManager configured with Non Blocking IO-threading model: 3 input threads and 3 output threads
+2016-09-02 09:01:52.945  INFO 5 --- [           main] com.hazelcast.cluster.impl.TcpIpJoiner   : [10.244.37.2]:5701 [someGroup] [3.7.3]
 
 
 Members [1] {
        	Member [10.244.37.2]:5701 - a212635b-ffd9-4510-99db-3ef75957dbe8 this
 }
 
-2016-09-02 09:01:53.044  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.37.2]:5701 [someGroup] [3.7] [10.244.37.2]:5701 is STARTED
+2016-09-02 09:01:53.044  INFO 5 --- [           main] com.hazelcast.core.LifecycleService      : [10.244.37.2]:5701 [someGroup] [3.7.3] [10.244.37.2]:5701 is STARTED
 2016-09-02 09:01:53.049  INFO 5 --- [           main] com.github.pires.hazelcast.Application   : Started Application in 6.954 seconds (JVM running for 7.91)
-2016-09-02 09:03:00.832  INFO 5 --- [thread-Acceptor] c.h.nio.tcp.SocketAcceptorThread         : [10.244.37.2]:5701 [someGroup] [3.7] Accepting socket connection from /10.244.86.3:37517
-2016-09-02 09:03:00.849  INFO 5 --- [cached.thread-2] c.h.nio.tcp.TcpIpConnectionManager       : [10.244.37.2]:5701 [someGroup] [3.7] Established socket connection between /10.244.37.2:5701 and /10.244.86.3:37517
-2016-09-02 09:03:07.840  INFO 5 --- [ration.thread-0] c.h.internal.cluster.ClusterService      : [10.244.37.2]:5701 [someGroup] [3.7]
+2016-09-02 09:03:00.832  INFO 5 --- [thread-Acceptor] c.h.nio.tcp.SocketAcceptorThread         : [10.244.37.2]:5701 [someGroup] [3.7.3] Accepting socket connection from /10.244.86.3:37517
+2016-09-02 09:03:00.849  INFO 5 --- [cached.thread-2] c.h.nio.tcp.TcpIpConnectionManager       : [10.244.37.2]:5701 [someGroup] [3.7.3] Established socket connection between /10.244.37.2:5701 and /10.244.86.3:37517
+2016-09-02 09:03:07.840  INFO 5 --- [ration.thread-0] c.h.internal.cluster.ClusterService      : [10.244.37.2]:5701 [someGroup] [3.7.3]
 
 Members [2] {
        	Member [10.244.37.2]:5701 - a212635b-ffd9-4510-99db-3ef75957dbe8 this
