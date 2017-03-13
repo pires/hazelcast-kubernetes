@@ -1,12 +1,12 @@
 FROM quay.io/pires/docker-jre:8u112_1
 
-MAINTAINER Paulo Pires <pjpires@gmail.com>
+label maintainer Paulo Pires <pjpires@gmail.com>
 
-EXPOSE 5701
+env VERSION 3.8
 
 RUN \
   apk add --update curl ca-certificates; apk upgrade; \
-  curl -Lskj https://github.com/pires/hazelcast-kubernetes-bootstrapper/releases/download/0.8.0/hazelcast-kubernetes-bootstrapper-0.8.0.jar \
+  curl -Lskj https://github.com/pires/hazelcast-kubernetes-bootstrapper/releases/download/$VERSION/hazelcast-kubernetes-bootstrapper-$VERSION.jar \
   -o /bootstrapper.jar;\
   apk del curl wget; \
   rm /var/cache/apk/*
