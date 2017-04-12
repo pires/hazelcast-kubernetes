@@ -1,7 +1,7 @@
 hazelcast-kubernetes
 ====================
 
-Hazelcast clustering for Kubernetes made easy. It includes a lean (82MB) Hazelcast with Kubernetes discovery support container image, based on Alpine Linux.
+Hazelcast clustering for Kubernetes made easy. It includes a lean (98MB) Hazelcast with Kubernetes discovery support container image, based on Alpine Linux.
 
 [![Docker Repository on Quay](https://quay.io/repository/pires/hazelcast-kubernetes/status "Docker Repository on Quay")](https://quay.io/repository/pires/hazelcast-kubernetes)
 
