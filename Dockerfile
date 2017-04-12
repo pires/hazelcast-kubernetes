@@ -1,8 +1,7 @@
-FROM quay.io/pires/docker-jre:8u112_1
-
+FROM quay.io/pires/docker-jre:8u121
 label maintainer Paulo Pires <pjpires@gmail.com>
 
-env VERSION 3.8_1
+env VERSION 3.8.1
 
 RUN \
   apk add --update curl ca-certificates; apk upgrade; \
