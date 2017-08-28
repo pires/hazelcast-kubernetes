@@ -8,7 +8,7 @@ Hazelcast clustering for Kubernetes made easy. It includes a lean (100MB) Hazelc
 ## Software
 
 * JRE 8u131
-* Hazelcast 3.8.3
+* Hazelcast 3.8.4
 
 ## Pre-requisites
 

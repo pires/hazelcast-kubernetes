@@ -1,7 +1,7 @@
-FROM quay.io/pires/docker-jre:8u131_alpine3.6.2
+FROM quay.io/pires/docker-jre:8u131_r2
 label maintainer Paulo Pires <pjpires@gmail.com>
 
-ENV VERSION 3.8.3
+ENV VERSION 3.8.4
 
 RUN \
   apk add --update curl ca-certificates; apk upgrade; \
