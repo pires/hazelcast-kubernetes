@@ -1,14 +1,15 @@
 hazelcast-kubernetes
 ====================
 
-Hazelcast clustering for Kubernetes made easy. It includes a lean (100MB) Hazelcast with Kubernetes discovery support container image, based on Alpine Linux.
+Hazelcast clustering for Kubernetes made easy.
+It includes a lean Hazelcast container image, based on Alpine Linux, with Kubernetes discovery support.
 
 [![Docker Repository on Quay](https://quay.io/repository/pires/hazelcast-kubernetes/status "Docker Repository on Quay")](https://quay.io/repository/pires/hazelcast-kubernetes)
 
 ## Software
 
 * JRE 8u131
-* Hazelcast 3.8.5
+* Hazelcast 3.9.0
 
 ## Pre-requisites
 
@@ -96,7 +97,7 @@ spec:
     spec:
       containers:
       - name: hazelcast
-        image: quay.io/pires/hazelcast-kubernetes:3.8.5
+        image: quay.io/pires/hazelcast-kubernetes:3.9.0
         imagePullPolicy: Always
         env:
         - name: "DNS_DOMAIN"
@@ -124,7 +125,7 @@ $ kubectl get endpoints hazelcast -o yaml
 apiVersion: v1
 kind: Endpoints
 metadata:
-  creationTimestamp: 2017-09-11T07:30:15Z
+  creationTimestamp: 2017-11-23T07:30:15Z
   labels:
     name: hazelcast
   name: hazelcast
@@ -177,30 +178,30 @@ $ kubectl logs po/hazelcast-414548760-fb5bh
 2017-09-12 12:06:18.663  INFO 7 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2017-09-12 12:06:18.675  INFO 7 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Asking k8s registry at https://kubernetes.default.svc.cluster.local..
 2017-09-12 12:06:19.103  INFO 7 --- [           main] c.g.p.h.HazelcastDiscoveryController     : Found 1 pods running Hazelcast.
-2017-09-12 12:06:19.169  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.8.5] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [172.17.0.4]
-2017-09-12 12:06:19.169  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.8.5] Prefer IPv4 stack is true.
-2017-09-12 12:06:19.176  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.8.5] Picked [172.17.0.4]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
-2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.8.5] Hazelcast 3.8.5 (20170906 - e424927) starting at [172.17.0.4]:5701
-2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.8.5] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
-2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.8.5] Configured Hazelcast Serialization version : 1
-2017-09-12 12:06:19.423  INFO 7 --- [           main] c.h.s.i.o.impl.BackpressureRegulator     : [172.17.0.4]:5701 [someGroup] [3.8.5] Backpressure is disabled
-2017-09-12 12:06:20.048  INFO 7 --- [           main] com.hazelcast.instance.Node              : [172.17.0.4]:5701 [someGroup] [3.8.5] Creating TcpIpJoiner
-2017-09-12 12:06:20.242  INFO 7 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [172.17.0.4]:5701 [someGroup] [3.8.5] Starting 2 partition threads
-2017-09-12 12:06:20.250  INFO 7 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [172.17.0.4]:5701 [someGroup] [3.8.5] Starting 3 generic threads (1 dedicated for priority tasks)
-2017-09-12 12:06:20.270  INFO 7 --- [           main] com.hazelcast.core.LifecycleService      : [172.17.0.4]:5701 [someGroup] [3.8.5] [172.17.0.4]:5701 is STARTING
-2017-09-12 12:06:20.296  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.8.5] Cluster version set to 3.8
-2017-09-12 12:06:20.297  INFO 7 --- [           main] com.hazelcast.cluster.impl.TcpIpJoiner   : [172.17.0.4]:5701 [someGroup] [3.8.5] 
+2017-09-12 12:06:19.169  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.9.0] Interfaces is disabled, trying to pick one address from TCP-IP config addresses: [172.17.0.4]
+2017-09-12 12:06:19.169  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.9.0] Prefer IPv4 stack is true.
+2017-09-12 12:06:19.176  INFO 7 --- [           main] c.h.instance.DefaultAddressPicker        : [LOCAL] [someGroup] [3.9.0] Picked [172.17.0.4]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.9.0] Hazelcast 3.9.0 (20170906 - e424927) starting at [172.17.0.4]:5701
+2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.9.0] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+2017-09-12 12:06:19.191  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.9.0] Configured Hazelcast Serialization version : 1
+2017-09-12 12:06:19.423  INFO 7 --- [           main] c.h.s.i.o.impl.BackpressureRegulator     : [172.17.0.4]:5701 [someGroup] [3.9.0] Backpressure is disabled
+2017-09-12 12:06:20.048  INFO 7 --- [           main] com.hazelcast.instance.Node              : [172.17.0.4]:5701 [someGroup] [3.9.0] Creating TcpIpJoiner
+2017-09-12 12:06:20.242  INFO 7 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [172.17.0.4]:5701 [someGroup] [3.9.0] Starting 2 partition threads
+2017-09-12 12:06:20.250  INFO 7 --- [           main] c.h.s.i.o.impl.OperationExecutorImpl     : [172.17.0.4]:5701 [someGroup] [3.9.0] Starting 3 generic threads (1 dedicated for priority tasks)
+2017-09-12 12:06:20.270  INFO 7 --- [           main] com.hazelcast.core.LifecycleService      : [172.17.0.4]:5701 [someGroup] [3.9.0] [172.17.0.4]:5701 is STARTING
+2017-09-12 12:06:20.296  INFO 7 --- [           main] com.hazelcast.system                     : [172.17.0.4]:5701 [someGroup] [3.9.0] Cluster version set to 3.8
+2017-09-12 12:06:20.297  INFO 7 --- [           main] com.hazelcast.cluster.impl.TcpIpJoiner   : [172.17.0.4]:5701 [someGroup] [3.9.0] 
 
 
 Members [1] {
 	Member [172.17.0.4]:5701 - 929e9148-870d-4f43-ba1d-fcc8ff973ab3 this
 }
 
-2017-09-12 12:06:20.340  INFO 7 --- [           main] com.hazelcast.core.LifecycleService      : [172.17.0.4]:5701 [someGroup] [3.8.5] [172.17.0.4]:5701 is STARTED
+2017-09-12 12:06:20.340  INFO 7 --- [           main] com.hazelcast.core.LifecycleService      : [172.17.0.4]:5701 [someGroup] [3.9.0] [172.17.0.4]:5701 is STARTED
 2017-09-12 12:06:20.343  INFO 7 --- [           main] com.github.pires.hazelcast.Application   : Started Application in 3.325 seconds (JVM running for 3.747)
-2017-09-12 12:15:05.855  INFO 7 --- [thread-Acceptor] c.h.nio.tcp.SocketAcceptorThread         : [172.17.0.4]:5701 [someGroup] [3.8.5] Accepting socket connection from /172.17.0.7:54699
-2017-09-12 12:15:05.863  INFO 7 --- [cached.thread-3] c.h.nio.tcp.TcpIpConnectionManager       : [172.17.0.4]:5701 [someGroup] [3.8.5] Established socket connection between /172.17.0.4:5701 and /172.17.0.7:54699
-2017-09-12 12:15:12.856  INFO 7 --- [ration.thread-1] c.h.internal.cluster.ClusterService      : [172.17.0.4]:5701 [someGroup] [3.8.5] 
+2017-09-12 12:15:05.855  INFO 7 --- [thread-Acceptor] c.h.nio.tcp.SocketAcceptorThread         : [172.17.0.4]:5701 [someGroup] [3.9.0] Accepting socket connection from /172.17.0.7:54699
+2017-09-12 12:15:05.863  INFO 7 --- [cached.thread-3] c.h.nio.tcp.TcpIpConnectionManager       : [172.17.0.4]:5701 [someGroup] [3.9.0] Established socket connection between /172.17.0.4:5701 and /172.17.0.7:54699
+2017-09-12 12:15:12.856  INFO 7 --- [ration.thread-1] c.h.internal.cluster.ClusterService      : [172.17.0.4]:5701 [someGroup] [3.9.0] 
 
 Members [2] {
 	Member [172.17.0.4]:5701 - 929e9148-870d-4f43-ba1d-fcc8ff973ab3 this
