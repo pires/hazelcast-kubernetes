@@ -1,4 +1,4 @@
-FROM quay.io/pires/docker-jre:8u131_alpine_nov
+FROM quay.io/pires/docker-jre:8u151
 
 label maintainer Paulo Pires <pjpires@gmail.com>
 
