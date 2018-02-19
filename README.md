@@ -9,7 +9,7 @@ It includes a lean Hazelcast container image, based on Alpine Linux, with Kubern
 ## Software
 
 * JRE 8u151
-* Hazelcast 3.9.2
+* Hazelcast 3.9.3
 
 ## Pre-requisites
 
@@ -97,7 +97,7 @@ spec:
     spec:
       containers:
       - name: hazelcast
-        image: quay.io/pires/hazelcast-kubernetes:3.9.2
+        image: quay.io/pires/hazelcast-kubernetes:3.9.3
         imagePullPolicy: Always
         env:
         - name: "DNS_DOMAIN"
