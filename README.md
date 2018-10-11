@@ -9,7 +9,7 @@ It includes a lean Hazelcast container image, based on Alpine Linux, with Kubern
 ## Software
 
 * JRE 8u151
-* Hazelcast 3.10.5
+* Hazelcast 3.10.6
 
 ## Pre-requisites
 
