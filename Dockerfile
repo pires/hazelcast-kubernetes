@@ -6,7 +6,7 @@ ENV VERSION 3.11
 
 RUN \
   apk add --update curl ca-certificates; apk upgrade; \
-  curl -Lskj https://github.com/pires/hazelcast-kubernetes-bootstrapper/releases/download/$VERSION/hazelcast-kubernetes-bootstrapper-$VERSION.jar \
+  curl -Lskj https://github.com/pires/hazelcast-kubernetes-bootstrapper/releases/download/hazelcast-kubernetes-bootstrapper-$VERSION/hazelcast-kubernetes-bootstrapper-$VERSION.jar \
   -o /bootstrapper.jar;\
   apk del curl wget; \
   rm /var/cache/apk/*
